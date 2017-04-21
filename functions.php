@@ -153,7 +153,7 @@
 		}
 		$res['errno'] = CRErrorCode::SUCCESS;
 		$key = 'urls_to_download';
-		$redis->zadd($key, time(), $seed);
+		$redis->zadd($key, time()*1000, $seed);
 		return $res;
 	}
 
