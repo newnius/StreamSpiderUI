@@ -10,13 +10,13 @@ function load_counts()
 		responseHandler: countResponseHandler,
 		cache: true,
 		striped: true,
-		pagination: false,
-		pageSize: 25,
+		pagination: true,
+		pageSize: 10,
 		pageList: [10, 25, 50, 100, 200],
-		search: false,
+		search: true,
 		showColumns: false,
 		showRefresh: true,
-		showToggle: false,
+		showToggle: true,
 		showPaginationSwitch: false,
 		minimumCountColumns: 2,
 		clickToSelect: false,
@@ -40,13 +40,13 @@ function load_counts()
 			title: 'Count',
 			align: 'center',
 			valign: 'middle',
-			sortable: false
+			sortable: true
 		}, {
 			field: 'ttl',
 			title: 'TTL',
 			align: 'center',
 			valign: 'middle',
-			sortable: false
+			sortable: true
 		}, {
 			field: 'operate',
 			title: 'Operate',

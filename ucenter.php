@@ -127,6 +127,7 @@
 										<table id="table-pattern" data-toolbar="#toolbar" class="table table-striped">
 										</table> 
 									</div>
+									<span class="text-info">It takes time to expire cache.</span>
 								</div>
 							</div>
 						</div>
