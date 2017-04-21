@@ -16,16 +16,20 @@
 	}elseif(isset($_GET['queue'])){
 		$page_type='queue';
 
-	}elseif(isset($_GET['count'])){
+	}elseif(isset($_GET['stats'])){
+		$page_type='stats';
+
+	}elseif(isset($_GET['counts'])){
 		$host = cr_get_GET('host');
-		$page_type='count';
+		$page_type='counts';
 	}
 
 	$entries = array(
 		array('home', 'Home'),
 		array('patterns', 'Patterns'),
-		array('count', 'Counts'),
-		array('queue', 'Pending Queue')
+		array('counts', 'Counts'),
+		array('queue', 'Pending Queue'),
+		array('stats', 'Stats')
 	);
 	$visible_entries = array();
 	foreach($entries as $entry){
@@ -127,16 +131,43 @@
 							</div>
 						</div>
 
-						<?php }elseif($page_type === 'logs'){ ?>
-						<div id="logs">
+						<?php }elseif($page_type === 'counts'){ ?>
+						<div id="counts">
 							<div class="panel panel-default">
-								<div class="panel-heading">Recent activities</div> 
+								<div class="panel-heading">Download Counts</div> 
 								<div class="panel-body">
 									<div class="table-responsive">
 										<div id="toolbar"></div>
-										<table id="table-log" data-toolbar="#toolbar" class="table table-striped">
+										<table id="table-count" data-toolbar="#toolbar" class="table table-striped">
 										</table> 
-										<span class="text-info">* Last 20 recent records</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<?php }elseif($page_type === 'queue'){ ?>
+						<div id="queue">
+							<div class="panel panel-default">
+								<div class="panel-heading">Pending Queue</div> 
+								<div class="panel-body">
+									<div class="table-responsive">
+										<div id="toolbar"></div>
+										<table id="table-queue" data-toolbar="#toolbar" class="table table-striped">
+										</table> 
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<?php }elseif($page_type === 'stats'){ ?>
+						<div id="stats">
+							<div class="panel panel-default">
+								<div class="panel-heading">Running Stats</div> 
+								<div class="panel-body">
+									<div class="table-responsive">
+										<div id="toolbar"></div>
+										<table id="table-stat" data-toolbar="#toolbar" class="table table-striped">
+										</table> 
 									</div>
 								</div>
 							</div>
@@ -153,9 +184,11 @@
 		<?php require_once('footer.php'); ?>
 
 		<script src="static/util.js"></script>
-		<script src="static/site.js"></script>
+		<script src="static/count.js"></script>
+		<script src="static/queue.js"></script>
 		<script src="static/config.js"></script>
 		<script src="static/pattern.js"></script>
+		<script src="static/stat.js"></script>
 		<script src="static/ucenter.js"></script>
 
 		<script src="//cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>

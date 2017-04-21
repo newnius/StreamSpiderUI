@@ -17,7 +17,7 @@
 	define('WEBROOT', __DIR__);
 
 	//make absolute url for SEO and path update
-	define('BASE_URL', 'http://192.168.56.105/ana');// no '/' at the end
+	define('BASE_URL', 'http://192.168.56.105/StreamSpiderUI');// no '/' at the end
 
 	// if not vefified, not allowed to login	
 	define('FORCE_VERIFY', false);

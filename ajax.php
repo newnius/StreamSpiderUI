@@ -8,7 +8,6 @@
 
 	$res = array( 'errno' => CRErrorCode::UNKNOWN_REQUEST );
 
-
 	$action = cr_get_GET('action');
 	switch($action){
 		case 'update_config':
@@ -38,13 +37,23 @@
 			$res = pattern_gets();
 			break;
 
-		case 'get_verify_site_token':
-			$site = cr_get_GET('site');
-			$res = site_verify_token_get($site);
+		case 'get_counts':
+			$res = counts_get();
 			break;
-		case 'verify_site':
-			$site = cr_get_POST('site');
-			$res = site_verify($site);
+		case 'reset_count':
+			$key = cr_get_POST('key');
+			$res = count_reset($key);
+			break;
+
+		case 'get_queue':
+			$rule = new CRObject();
+			$rule->set('offset', cr_get_GET('offset'));
+			$rule->set('limit', cr_get_GET('limit'));
+			$res = queue_get($rule);
+			break;
+
+		case 'get_stats':
+			$res = stats_get();
 			break;
 		default:
 			;

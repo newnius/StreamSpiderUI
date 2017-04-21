@@ -60,24 +60,3 @@
 		</div>
 	</div>
 </div>
-
-<div class="modal fade" id="modal-verify-site" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Verify Site</h4>
-			</div>
-			<div class="modal-body">
-				<input type="hidden" id="input-verify-site" />
-				<h4>Your are verifing:&nbsp;&nbsp;<span id="modal-verify-site-site" class="text-success"></span></h4>
-				<h4>Step1 Create file:&nbsp;<span id="modal-verify-site-file" class="text-info">Loading...</span></h4>
-				<h4>Step2 Click the button below to finish.</h4>
-				<div>
-					<button id="btn-verify-site" type="button" class="btn btn-primary" disabled>Verify</button>
-					<span id="verify-site-msg" class="text-danger"></span>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>

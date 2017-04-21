@@ -83,7 +83,80 @@
 		$key = 'url_pattern_setting_'.$config->get('pattern');
 		$fields = array('expire', 'limitation', 'interval', 'parallelism');
 		foreach($fields as $field){
-			$redis->hset($key, $field, $config->getInt($field));
+			if($config->getInt($field)!==null)
+				$redis->hset($key, $field, $config->getInt($field));
 		}
+		return $res;
+	}
+
+
+	function counts_get()
+	{
+		$redis = RedisDAO::instance();
+		if($redis===null){
+			$res['errno'] = CRErrnoCode::UNABLE_TO_CONNECT_REDIS;
+			return $res;
+		}
+		$res['errno'] = CRErrorCode::SUCCESS;
+		$pattern = 'count_*';
+		$keys = $redis->keys($pattern);
+		$records = array();
+		foreach($keys as $key){
+			$record['count'] = $redis->get($key);
+			$record['ttl'] = $redis->ttl($key);
+			$record['key'] = $key;
+			$records[] = $record;
+		}
+		$res['records'] = $records;
+		return $res;
+	}
+
+
+	function count_reset($key)
+	{
+		$redis = RedisDAO::instance();
+		if($redis===null){
+			$res['errno'] = CRErrnoCode::UNABLE_TO_CONNECT_REDIS;
+			return $res;
+		}
+		$res['errno'] = CRErrorCode::SUCCESS;
+		$redis->del($key);
+		return $res;
+	}
+
+
+	function queue_get($rule)
+	{
+		$redis = RedisDAO::instance();
+		if($redis===null){
+			$res['errno'] = CRErrnoCode::UNABLE_TO_CONNECT_REDIS;
+			return $res;
+		}
+		$res['errno'] = CRErrorCode::SUCCESS;
+		$key = 'urls_to_download';
+		$start = $rule->getInt('offset', 0);
+		$stop = $start + $rule->getInt('limit', 20) - 1;
+		$members = $redis->zrange($key, $start, $stop, 'WITHSCORES');
+		$res['members'] = $members;
+		$total = $redis->zcard($key);
+		$res['total'] = $total;
+		return $res;
+	}
+
+	
+	function stats_get()
+	{
+		$redis = RedisDAO::instance();
+		if($redis===null){
+			$res['errno'] = CRErrnoCode::UNABLE_TO_CONNECT_REDIS;
+			return $res;
+		}
+		$res['errno'] = CRErrorCode::SUCCESS;
+		$stats = array();
+		$key = 'urls_to_download';
+		$stats['pending'] = $redis->zcard($key);
+		$stats['dbsize'] = $redis->dbsize();
+		$stats['patterns'] = $redis->zcard('allowed_url_patterns');
+		$res['stats'] = $stats;
 		return $res;
 	}
