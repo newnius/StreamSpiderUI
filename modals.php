@@ -60,3 +60,24 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id="modal-queue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Add Seed</h4>
+			</div>
+			<div class="modal-body">
+				<form id="form-queue" action="javascript:void(0)">
+					<label for="seed" class="sr-only">Seed</label>
+					<input type="url" id="form-queue-seed" class="form-group form-control" placeholder="http://example.com/view/121" required />
+					<div>
+						<button id="form-queue-submit" type="submit" class="btn btn-primary">Add</button>
+						<span id="form-queue-msg" class="text-danger"></span>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

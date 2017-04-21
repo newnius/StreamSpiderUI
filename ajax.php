@@ -51,6 +51,10 @@
 			$rule->set('limit', cr_get_GET('limit'));
 			$res = queue_get($rule);
 			break;
+		case 'add_seed':
+			$seed = cr_get_POST('seed');
+			$res = queue_add_seed($seed);
+			break;
 
 		case 'get_stats':
 			$res = stats_get();

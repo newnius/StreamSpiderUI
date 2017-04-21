@@ -151,7 +151,11 @@
 								<div class="panel-heading">Pending Queue</div> 
 								<div class="panel-body">
 									<div class="table-responsive">
-										<div id="toolbar"></div>
+										<div id="toolbar">
+											<button id="btn-queue-add" class="btn btn-primary">
+												<i class="glyphicon glyphicon-plus"></i> Add
+											</button>
+										</div>
 										<table id="table-queue" data-toolbar="#toolbar" class="table table-striped">
 										</table> 
 									</div>

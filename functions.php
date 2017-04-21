@@ -143,7 +143,21 @@
 		return $res;
 	}
 
-	
+
+	function queue_add_seed($seed)
+	{
+		$redis = RedisDAO::instance();
+		if($redis===null){
+			$res['errno'] = CRErrnoCode::UNABLE_TO_CONNECT_REDIS;
+			return $res;
+		}
+		$res['errno'] = CRErrorCode::SUCCESS;
+		$key = 'urls_to_download';
+		$redis->zadd($key, time(), $seed);
+		return $res;
+	}
+
+
 	function stats_get()
 	{
 		$redis = RedisDAO::instance();

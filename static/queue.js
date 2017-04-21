@@ -1,5 +1,36 @@
 function register_events_queue()
 {
+	$('#btn-queue-add').click(function(e){
+		$("#form-queue-seed").val("");
+		$('#modal-queue').modal('show');
+	});
+
+	$("#form-queue-submit").click(function(e){
+		$("#form-queue-submit").attr("disabled", "disabled");
+		var seed = $("#form-queue-seed").val();
+		var ajax = $.ajax({
+			url: "ajax.php?action=add_seed",
+			type: 'POST',
+			data: {
+				seed: seed
+			}
+		});
+		ajax.done(function(json){
+			var res = JSON.parse(json);
+			if(res["errno"] == 0){
+				$('#modal-queue').modal('hide');
+				$('#table-queue').bootstrapTable("refresh");
+			}else{
+				$("#form-queue-msg").html(res["msg"]);
+				$("#modal-queue").effect("shake");
+			}
+			$("#form-queue-submit").removeAttr("disabled");
+		});
+		ajax.fail(function(jqXHR,textStatus){
+			alert("Request failed :" + textStatus);
+			$("#form-queue-submit").removeAttr("disabled");
+		});
+	});
 }
 
 function load_queue()
@@ -59,7 +90,6 @@ function queueResponseHandler(res)
 		});
 		result['total'] = res['total'];
 		result['rows'] = records;
-		console.log(result);
 		return result;
 	}
 	alert(res['msg']);
